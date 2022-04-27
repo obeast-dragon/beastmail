@@ -1,0 +1,17 @@
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xmlbuildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+#设置不提交的文件类型
+**/mvnw
+**/mvnw.cmd
+
+**/.mvn
+**/target/
+
