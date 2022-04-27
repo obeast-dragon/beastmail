@@ -15,3 +15,6 @@ dependency-reduced-pom.xmlbuildNumber.properties
 **/.mvn
 **/target/
 
+.idea
+
+**/.gitignore
