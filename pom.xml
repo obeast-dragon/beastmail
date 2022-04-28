@@ -14,5 +14,8 @@
         <module>beastmail-order</module>
         <module>beastmail-member</module>
         <module>beastmail-coupon</module>
+        <module>renren-fast</module>
+        <module>renren-generator</module>
+        <module>beastmail-common</module>
     </modules>
 </project>
