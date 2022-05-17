@@ -3,7 +3,7 @@ spring:
     username: root
     password: mysql1234
     url: jdbc:mysql://192.168.122.129:3307/beastmail_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   #注册服务
   cloud:
