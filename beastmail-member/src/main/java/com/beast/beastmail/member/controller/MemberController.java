@@ -3,6 +3,7 @@ package com.beast.beastmail.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.beast.beastmail.member.feign.CouponFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,21 @@ import com.beast.common.utils.R;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private CouponFeignService couponFeignService;
+
+
+    @RequestMapping("/coupon")
+    public R test(){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setNickname("张三");
+
+        R couponFeign = couponFeignService.memberCoupon();
+
+        return R.ok().put("member", memberEntity).put("coupons", couponFeign.get("coupons"));
+
+    }
 
     /**
      * 列表
