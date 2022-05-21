@@ -2,20 +2,19 @@ package com.beast.beastmail.product.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.beast.beastmail.product.entity.CategoryEntity;
 import com.beast.beastmail.product.service.CategoryService;
-import com.beast.common.utils.PageUtils;
 import com.beast.common.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -48,15 +47,26 @@ public class CategoryController {
     public R info(@PathVariable("catId") Long catId){
 		CategoryEntity category = categoryService.getById(catId);
 
-        return R.ok().put("category", category);
+        return R.ok().put("data", category);
     }
 
     /**
      * 保存
      */
+
     @RequestMapping("/save")
-    public R save(@RequestBody CategoryEntity category){
+    public R save( @RequestBody CategoryEntity category){
 		categoryService.save(category);
+
+        return R.ok();
+    }
+
+    /**
+     * 批量修改
+     */
+    @RequestMapping("/update/sort")
+    public R updateSort(@RequestBody CategoryEntity[] category){
+        categoryService.updateBatchById(Arrays.asList(category));
 
         return R.ok();
     }
@@ -73,11 +83,14 @@ public class CategoryController {
 
     /**
      * 删除
+     * @RequestBody：获取请求体，必须发送post请求
+     * spingMvc自动将请求体数据转换（json）为对应的对象
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] catIds){
+        //1、检查当前删除菜单，是否被其他地方引用
 		categoryService.removeByIds(Arrays.asList(catIds));
-
+        categoryService.removeMenusByIds(Arrays.asList(catIds));
         return R.ok();
     }
 
